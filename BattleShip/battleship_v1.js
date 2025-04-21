@@ -1,43 +1,37 @@
-var randdomLoc = Math.floor(Math.random() * 5);
-var shipLocation = [randdomLoc, randomLoc + 1, randomLoc + 2];
+var location1 = 3;
+var location2 = 4;
+var location3 = 5;
 
-let guess;
-let hits = 0;
-let guesses = 0;
-let isSunk = false;
+var guess;
+var hits = 0;
+var guesses = 0;
 
-while (isSunk === false) {
-    guess = prompt("Ready, aim, fire! (Enter a number from 0-6):");
+var isSunk = false;
 
-if (guess === null){
-    alert("Thank you for playing!");
-    break;
-}
-}
+// Game Logic
 
-guess = parseInt(guess, 10);
+while (isSunk == false) {
+    guess = prompt("Ready!, Aim!, Fire! (Enter 0-6):");
 
-if (isNaN(guess)  || guess < 0 || guess > 6) {
-    alert("Please enter a valid number between 0 and 6.");
-    continue;
-}
+    if (guess < 0 || guess > 6) {
+        alert("Please enter a valid number!")
+    }else {
+        guesses = guesses + 1;
 
-guesses++;
+        if (guess == location1 || guess == location2 || guess == location3) {
+            hits += 1;
+            alert("Hit!")
 
-const hitIndex = shipLocation.indexOf(guess);
-
-if(hitIndex !== -1) {
-    alert("HIT!");
-    shipLocation,splice(hitIndex, 1);
-    hits++;
-    if (shipLocation.length === 0) {
-        isSunk = true;
-    } else{
-        alert("MIss!");
+            if (hits == 3) {
+                isSunk = true;
+                alert("You sank my battleship")
+            }
+        }else{
+            alert("Miss!")
+        }
     }
 }
 
-var accuracy = (guesses > 0 ? (hits / guesses) * 100 : 0).toFIxed(2);
-var stats = "You took " + guesses + " guesses to sink the battleship!\n" +
-    "Accuracy: " + accuracy + "%";
+var stats = "You sank my battleship at " + guesses + " guesses" + "and your accuracy is" + (3/guesses);
+
 alert(stats);
